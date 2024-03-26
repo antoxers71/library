@@ -3,7 +3,6 @@ const userRouter = require('./routes/user');
 const booksRouter = require('./routes/books');
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/user', userRouter);
 

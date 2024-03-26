@@ -7,6 +7,7 @@ module.exports = class Book {
         favorite = "",
         fileCover = "",
         fileName = "",
+        fileBook = "",
     ) {
         this.id = Object.values(library).length;
         this.title = title;
@@ -15,5 +16,6 @@ module.exports = class Book {
         this.favorite = favorite;
         this.fileCover = fileCover;
         this.fileName = fileName;
+        this.fileBook = fileBook;
     }
 }

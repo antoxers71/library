@@ -1,0 +1,31 @@
+antonpopkov@MacBook-Pro-Anton library % docker run --name mynode -it -e NAME=Anton -e SURNAME=Popkov node:20-alpine
+Unable to find image 'node:20-alpine' locally
+20-alpine: Pulling from library/node
+bca4290a9639: Pull complete
+055bd0b6e964: Pull complete
+e313a99c006e: Pull complete
+3461c282be73: Pull complete
+Digest: sha256:ef3f47741e161900ddd07addcaca7e76534a9205e4cd73b2ed091ba339004a75
+Status: Downloaded newer image for node:20-alpine
+Welcome to Node.js v20.12.0.
+Type ".help" for more information.
+> console.log(`Привет, ${process.env.NAME} ${process.env.SURNAME}!`);
+Привет, Anton Popkov!
+undefined
+>
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+>
+antonpopkov@MacBook-Pro-Anton library % docker rm -f mynode
+mynode
+antonpopkov@MacBook-Pro-Anton library % docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+antonpopkov@MacBook-Pro-Anton library % docker images
+REPOSITORY   TAG         IMAGE ID       CREATED        SIZE
+node         20-alpine   b3db35a1a4b7   28 hours ago   133MB
+antonpopkov@MacBook-Pro-Anton library % docker rmi b3d
+Untagged: node:20-alpine
+Untagged: node@sha256:ef3f47741e161900ddd07addcaca7e76534a9205e4cd73b2ed091ba339004a75
+Deleted: sha256:b3db35a1a4b7f9b9d553c479343eba875f1dcdb65bb4a7891e03443e539908c0
+antonpopkov@MacBook-Pro-Anton library % docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+antonpopkov@MacBook-Pro-Anton library %

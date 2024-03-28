@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 router.get('/:id/download', (req, res) => {
     const {id} = req.params;
     if(library[id]) {
-        res.sendFile(path.join(__dirname, '..', library[id].fileBook));
+        res.download(path.join(__dirname, '..', library[id].fileBook));
     } else {
         res.status(404);
         res.json('Книга не найдена');

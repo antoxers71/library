@@ -1,0 +1,66 @@
+antonpopkov@MacBook-Pro-Anton library % docker run -d --name first_node -it -v ./data:/var/first/data node:20.10 sleep infinity
+Unable to find image 'node:20.10' locally
+20.10: Pulling from library/node
+b66b4ecd3ecf: Pull complete
+6c641d36985b: Pull complete
+ddd8544b6e15: Pull complete
+ae58c7c06d64: Pull complete
+5d0523b85d8e: Pull complete
+3b8c33b8dbe0: Pull complete
+a6e645e016f2: Pull complete
+ad64183b4521: Pull complete
+Digest: sha256:8d0f16fe841577f9317ab49011c6d819e1fa81f8d4af7ece7ae0ac815e07ac84
+Status: Downloaded newer image for node:20.10
+a9368ef8881f00ceac6ca5bcbdada260655bd39080db53cc7f5b64830bb0457f
+antonpopkov@MacBook-Pro-Anton library % docker run -d --name second_node -it -v ./data:/var/second/data node:20.10 sleep infinity
+e7654916b7741843db19e55beeb495621e2df7cc5ab44abce001964f57457965
+antonpopkov@MacBook-Pro-Anton library % docker exec -it first_node /bin/bash
+root@a9368ef8881f:/# echo "Hello!" > /var/first/data/text1.txt
+root@a9368ef8881f:/# ^C
+root@a9368ef8881f:/# exit
+exit
+antonpopkov@MacBook-Pro-Anton library % docker exec -it second_node /bin/bash
+root@e7654916b774:/# ls var/second/data
+text1.txt  text2.txt
+root@e7654916b774:/# cat var/second/data/text1.txt
+Hello!
+root@e7654916b774:/# cat var/second/data/text2.txt
+Hello2!
+root@e7654916b774:/# exit
+exit
+antonpopkov@MacBook-Pro-Anton library % docker ps
+CONTAINER ID   IMAGE        COMMAND                  CREATED         STATUS         PORTS     NAMES
+e7654916b774   node:20.10   "docker-entrypoint.s…"   6 minutes ago   Up 6 minutes             second_node
+a9368ef8881f   node:20.10   "docker-entrypoint.s…"   8 minutes ago   Up 8 minutes             first_node
+antonpopkov@MacBook-Pro-Anton library % docker rm e7 -f
+e7
+antonpopkov@MacBook-Pro-Anton library % docker rm a9 -f
+a9
+antonpopkov@MacBook-Pro-Anton library % docker images
+REPOSITORY   TAG         IMAGE ID       CREATED        SIZE
+node         20-alpine   b3db35a1a4b7   28 hours ago   133MB
+node         20.10       539b1647c260   3 months ago   1.1GB
+antonpopkov@MacBook-Pro-Anton library % docker rmi b
+Untagged: node:20-alpine
+Untagged: node@sha256:ef3f47741e161900ddd07addcaca7e76534a9205e4cd73b2ed091ba339004a75
+Deleted: sha256:b3db35a1a4b7f9b9d553c479343eba875f1dcdb65bb4a7891e03443e539908c0
+Deleted: sha256:8433a875c286345ea96426eba8c574981b6442b697d7d14ccb86d861eba54e2f
+Deleted: sha256:98a251a96730ec99131fa82f51a3909f16e14f6646b830a2dacabe3b90745d6e
+Deleted: sha256:f7f014e08067ae0554a3852767b1fcb38b156e6f4199c9781355d121f041e561
+Deleted: sha256:b09314aec293bcd9a8ee5e643539437b3846f9e5e55f79e282e5f67e3026de5e
+antonpopkov@MacBook-Pro-Anton library % docker rmi 53
+Untagged: node:20.10
+Untagged: node@sha256:8d0f16fe841577f9317ab49011c6d819e1fa81f8d4af7ece7ae0ac815e07ac84
+Deleted: sha256:539b1647c260937bb4d2d9a9c912412932ec2c5c689220d1be9815684bccc8b0
+Deleted: sha256:af2890db592dae64636750e53fd720c5792cce793dcde47d6a8f10faa7ca6ea5
+Deleted: sha256:e52453015218b16f1fa4f617c96552805af189bf3b17761da0ac3c3f27dda5d0
+Deleted: sha256:be517085a925ab40509d77ea8d94b35268a8baab80188c819b4561e54529fc53
+Deleted: sha256:6cfaf966ec5b74c314bd18f650366dcb5142afbff550cf7a0c707a2df40f7c79
+Deleted: sha256:cce4ffc3b360ada665f321a41b58beebc56e7e70adb31fa4655ef08ffe41e74b
+Deleted: sha256:9b74066b18ebc24bb3339060cb611fbd58abe5afa6a63328e45de325bfb63e8e
+Deleted: sha256:163c69ad08fc965715fb630e6e32bac96f83962508dcb825a2ee282af734fe86
+Deleted: sha256:3fc083f4e08dd7ab0386b7435c50e86fe37e402f2002987607e712d8a6d29fe5
+antonpopkov@MacBook-Pro-Anton library % docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+antonpopkov@MacBook-Pro-Anton library %
+

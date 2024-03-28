@@ -1,0 +1,86 @@
+antonpopkov@MacBook-Pro-Anton library % docker run --name pinger -it busybox ping -c 7 netology.ru
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+45d8eb5967de: Pull complete
+Digest: sha256:650fd573e056b679a5110a70aabeb01e26b76e545ec4b9c70a9523f2dfaf18c6
+Status: Downloaded newer image for busybox:latest
+PING netology.ru (104.22.41.171): 56 data bytes
+64 bytes from 104.22.41.171: seq=0 ttl=63 time=34.122 ms
+64 bytes from 104.22.41.171: seq=1 ttl=63 time=59.292 ms
+64 bytes from 104.22.41.171: seq=2 ttl=63 time=66.197 ms
+64 bytes from 104.22.41.171: seq=3 ttl=63 time=61.515 ms
+64 bytes from 104.22.41.171: seq=4 ttl=63 time=59.060 ms
+64 bytes from 104.22.41.171: seq=5 ttl=63 time=69.045 ms
+64 bytes from 104.22.41.171: seq=6 ttl=63 time=79.673 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 34.122/61.272/79.673 ms
+antonpopkov@MacBook-Pro-Anton library % docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
+b81b8b783e28   busybox   "ping -c 7 netology.…"   31 seconds ago   Exited (0) 25 seconds ago             pinger
+antonpopkov@MacBook-Pro-Anton library % docker logs pinger
+PING netology.ru (104.22.41.171): 56 data bytes
+64 bytes from 104.22.41.171: seq=0 ttl=63 time=34.122 ms
+64 bytes from 104.22.41.171: seq=1 ttl=63 time=59.292 ms
+64 bytes from 104.22.41.171: seq=2 ttl=63 time=66.197 ms
+64 bytes from 104.22.41.171: seq=3 ttl=63 time=61.515 ms
+64 bytes from 104.22.41.171: seq=4 ttl=63 time=59.060 ms
+64 bytes from 104.22.41.171: seq=5 ttl=63 time=69.045 ms
+64 bytes from 104.22.41.171: seq=6 ttl=63 time=79.673 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 34.122/61.272/79.673 ms
+antonpopkov@MacBook-Pro-Anton library % docker start pinger
+pinger
+antonpopkov@MacBook-Pro-Anton library % docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                      PORTS     NAMES
+b81b8b783e28   busybox   "ping -c 7 netology.…"   2 minutes ago   Exited (0) 14 seconds ago             pinger
+antonpopkov@MacBook-Pro-Anton library % docker logs pinger
+PING netology.ru (104.22.41.171): 56 data bytes
+64 bytes from 104.22.41.171: seq=0 ttl=63 time=34.122 ms
+64 bytes from 104.22.41.171: seq=1 ttl=63 time=59.292 ms
+64 bytes from 104.22.41.171: seq=2 ttl=63 time=66.197 ms
+64 bytes from 104.22.41.171: seq=3 ttl=63 time=61.515 ms
+64 bytes from 104.22.41.171: seq=4 ttl=63 time=59.060 ms
+64 bytes from 104.22.41.171: seq=5 ttl=63 time=69.045 ms
+64 bytes from 104.22.41.171: seq=6 ttl=63 time=79.673 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 34.122/61.272/79.673 ms
+PING netology.ru (104.22.41.171): 56 data bytes
+64 bytes from 104.22.41.171: seq=0 ttl=63 time=8.651 ms
+64 bytes from 104.22.41.171: seq=1 ttl=63 time=9.649 ms
+64 bytes from 104.22.41.171: seq=2 ttl=63 time=14.961 ms
+64 bytes from 104.22.41.171: seq=3 ttl=63 time=11.321 ms
+64 bytes from 104.22.41.171: seq=4 ttl=63 time=26.058 ms
+64 bytes from 104.22.41.171: seq=5 ttl=63 time=11.409 ms
+64 bytes from 104.22.41.171: seq=6 ttl=63 time=19.298 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 8.651/14.478/26.058 ms
+antonpopkov@MacBook-Pro-Anton library % docker logs pinger | grep PING
+PING netology.ru (104.22.41.171): 56 data bytes
+PING netology.ru (104.22.41.171): 56 data bytes
+antonpopkov@MacBook-Pro-Anton library % docker logs pinger | grep transmitted
+7 packets transmitted, 7 packets received, 0% packet loss
+7 packets transmitted, 7 packets received, 0% packet loss
+antonpopkov@MacBook-Pro-Anton library % docker rm -f pinger
+pinger
+antonpopkov@MacBook-Pro-Anton library % docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+antonpopkov@MacBook-Pro-Anton library % docker images
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+busybox      latest    46bd05c4a04f   10 months ago   4.04MB
+antonpopkov@MacBook-Pro-Anton library % docker rmi 46b
+Untagged: busybox:latest
+Untagged: busybox@sha256:650fd573e056b679a5110a70aabeb01e26b76e545ec4b9c70a9523f2dfaf18c6
+Deleted: sha256:46bd05c4a04f3d121198e054da02daed22d0f561764acb0f0594066d5972619b
+Deleted: sha256:3c4bc35c677d052e8ce865edea845689bf92fe12482683243d74f93fb690b893
+antonpopkov@MacBook-Pro-Anton library % docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+antonpopkov@MacBook-Pro-Anton library %
+

@@ -49,7 +49,7 @@ router.post('/create',
         res.redirect('/')
     });
 
-router.get('/:id', (req, res) => {
+router.get('/view/:id', (req, res) => {
     const {id} = req.params;
 
     if(!library[id]) {
@@ -86,7 +86,7 @@ router.post('/update/:id', (req, res) => {
 
     library[id] = Object.assign(library[id], req.body);
 
-    res.redirect(`/${id}`);
+    res.redirect(`/view/${id}`);
 });
 
 router.post('/delete/:id', (req, res) => {
